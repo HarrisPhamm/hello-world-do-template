@@ -1,71 +1,184 @@
-import { DurableObject } from "cloudflare:workers";
-
-/**
- * Welcome to Cloudflare Workers! This is your first Durable Objects application.
- *
- * - Run `npm run dev` in your terminal to start a development server
- * - Open a browser tab at http://localhost:8787/ to see your Durable Object in action
- * - Run `npm run deploy` to publish your application
- *
- * Bind resources to your worker in `wrangler.jsonc`. After adding bindings, a type definition for the
- * `Env` object can be regenerated with `npm run cf-typegen`.
- *
- * Learn more at https://developers.cloudflare.com/durable-objects
- */
-
-/** A Durable Object's behavior is defined in an exported Javascript class */
-export class MyDurableObject extends DurableObject<Env> {
-	/**
-	 * The constructor is invoked once upon creation of the Durable Object, i.e. the first call to
-	 * 	`DurableObjectStub::get` for a given identifier (no-op constructors can be omitted)
-	 *
-	 * @param ctx - The interface for interacting with Durable Object state
-	 * @param env - The interface to reference bindings declared in wrangler.jsonc
-	 */
-	constructor(ctx: DurableObjectState, env: Env) {
-		super(ctx, env);
-	}
-
-	/**
-	 * The Durable Object exposes an RPC method sayHello which will be invoked when a Durable
-	 *  Object instance receives a request from a Worker via the same method invocation on the stub
-	 *
-	 * @returns The greeting to be sent back to the Worker
-	 */
-	async sayHello(): Promise<string> {
-		let result = this.ctx.storage.sql
-			.exec("SELECT 'Hello, World!' as greeting")
-			.one() as { greeting: string };
-		return result.greeting;
-	}
-}
-
 export default {
-	/**
-	 * This is the standard fetch handler for a Cloudflare Worker
-	 *
-	 * @param request - The request submitted to the Worker from the client
-	 * @param env - The interface to reference bindings declared in wrangler.jsonc
-	 * @param ctx - The execution context of the Worker
-	 * @returns The response to be sent back to the client
-	 */
-	async fetch(request, env, ctx): Promise<Response> {
-		// Create a `DurableObjectId` for an instance of the `MyDurableObject`
-		// class. The name of class is used to identify the Durable Object.
-		// Requests from all Workers to the instance named
-		// will go to a single globally unique Durable Object instance.
-		const id: DurableObjectId = env.MY_DURABLE_OBJECT.idFromName(
-			new URL(request.url).pathname,
+	async fetch(request: Request): Promise<Response> {
+		return new Response(
+			`
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Trang Cá Nhân - Phạm Vũ Đạt</title>
+
+	<link
+		rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+	/>
+
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		body {
+			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+			background: linear-gradient(135deg, #74ebd5 0%, #9face6 100%);
+			min-height: 100vh;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			padding: 20px;
+		}
+
+		.card {
+			background: white;
+			width: 100%;
+			max-width: 450px;
+			border-radius: 20px;
+			padding: 40px 30px;
+			text-align: center;
+			box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+		}
+
+		.profile-img {
+			width: 150px;
+			height: 150px;
+			border-radius: 50%;
+			object-fit: cover;
+			margin-bottom: 20px;
+		}
+
+		h1 {
+			color: #2c3e50;
+			margin-bottom: 10px;
+		}
+
+		.bio {
+			color: #7f8c8d;
+			margin-bottom: 25px;
+			line-height: 1.5;
+		}
+
+		.contact-info {
+			background: #f8f9fa;
+			padding: 15px;
+			border-radius: 10px;
+			text-align: left;
+			margin-bottom: 25px;
+		}
+
+		.contact-info p {
+			margin-bottom: 10px;
+		}
+
+		.contact-info a {
+			text-decoration: none;
+			color: #34495e;
+		}
+
+		.social-links {
+			display: flex;
+			justify-content: center;
+			gap: 15px;
+		}
+
+		.social-btn {
+			width: 45px;
+			height: 45px;
+			border-radius: 50%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			color: white;
+			text-decoration: none;
+			font-size: 1.2rem;
+		}
+
+		.facebook { background: #1877f2; }
+		.tiktok { background: black; }
+		.whatsapp { background: #25d366; }
+		.wechat { background: #07c160; }
+	</style>
+</head>
+
+<body>
+
+	<div class="card">
+
+		<img
+			src="https://via.placeholder.com/150"
+			class="profile-img"
+		/>
+
+		<h1>PHẠM VŨ ĐẠT</h1>
+
+		<p class="bio">
+			Đam mê khám phá công nghệ.
+			Có sở thích với âm nhạc và game.
+			Luôn không ngừng học hỏi và kết nối.
+		</p>
+
+		<div class="contact-info">
+
+			<p>
+				📞
+				<a href="tel:+84367584529">
+					036 7584 529
+				</a>
+			</p>
+
+			<p>
+				✉️
+				<a href="mailto:harrisphammm@gmail.com">
+					harrisphammm@gmail.com
+				</a>
+			</p>
+
+		</div>
+
+		<div class="social-links">
+
+			<a
+				href="https://facebook.com/harrisphammm"
+				class="social-btn facebook"
+			>
+				F
+			</a>
+
+			<a
+				href="https://tiktok.com/@harris.dp"
+				class="social-btn tiktok"
+			>
+				T
+			</a>
+
+			<a
+				href="https://wa.me/84367584529"
+				class="social-btn whatsapp"
+			>
+				W
+			</a>
+
+			<a
+				href="https://u.wechat.com/harrisphammm"
+				class="social-btn wechat"
+			>
+				C
+			</a>
+
+		</div>
+
+	</div>
+
+</body>
+</html>
+			`,
+			{
+				headers: {
+					"content-type": "text/html;charset=UTF-8",
+				},
+			}
 		);
-
-		// Create a stub to open a communication channel with the Durable
-		// Object instance.
-		const stub = env.MY_DURABLE_OBJECT.get(id);
-
-		// Call the `sayHello()` RPC method on the stub to invoke the method on
-		// the remote Durable Object instance
-		const greeting = await stub.sayHello();
-
-		return new Response(greeting);
 	},
-} satisfies ExportedHandler<Env>;
+};
