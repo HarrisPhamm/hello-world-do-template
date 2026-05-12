@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Cá Nhân - Phạm Vũ Đạt</title>
+    
+    <!-- Nhúng thư viện FontAwesome để hiển thị các icon (Email, Phone, Facebook, Tiktok...) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* =========================================
+           CSS - ĐỊNH DẠNG GIAO DIỆN
+           ========================================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            /* Nền gradient trẻ trung, hiện đại */
+            background: linear-gradient(135deg, #74ebd5 0%, #9face6 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Thẻ chứa toàn bộ thông tin (Profile Card) */
+        .card {
+            background-color: #ffffff;
+            width: 100%;
+            max-width: 450px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            padding: 40px 30px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px); /* Hiệu ứng nổi lên khi di chuột */
+        }
+
+        /* Ảnh đại diện */
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%; /* Tạo hình tròn */
+            object-fit: cover;
+            border: 4px solid #ffffff;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+        }
+
+        /* Tên và Bio */
+        h1 {
+            color: #2c3e50;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .bio {
+            color: #7f8c8d;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 25px;
+            padding: 0 10px;
+        }
+
+        /* Phần Thông tin liên hệ (SĐT, Email) */
+        .contact-info {
+            text-align: left;
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+
+        .contact-info p {
+            color: #34495e;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .contact-info p:last-child {
+            margin-bottom: 0;
+        }
+
+        .contact-info i {
+            width: 25px;
+            color: #3498db;
+            font-size: 1.2rem;
+        }
+
+        .contact-info a {
+            color: #34495e;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-info a:hover {
+            color: #3498db;
+        }
+
+        /* Nút mạng xã hội */
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        /* Màu sắc riêng cho từng mạng xã hội */
+        .facebook { background-color: #1877f2; }
+        .tiktok { background-color: #000000; }
+        .whatsapp { background-color: #25d366; }
+        .wechat { background-color: #07c160; }
+
+        .social-btn:hover {
+            transform: scale(1.1); /* Phóng to nhẹ khi di chuột */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            color: #ffffff;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- =========================================
+         HTML - CẤU TRÚC NỘI DUNG
+         ========================================= -->
+
+    <div class="card">
+        <!-- Thay thế đường link bên dưới bằng ảnh của bạn -->
+        <img src="avata.jpg" alt="Ảnh đại diện Phạm Vũ Đạt" class="profile-img">
+        
+        <h1>PHẠM VŨ ĐẠT</h1>
+        <p class="bio">Đam mê khám phá công nghệ. Có sở thích với âm nhạc và game. Luôn không ngừng học hỏi và kết nối.</p>
+        
+        <!-- Thông tin liên hệ trực tiếp -->
+        <div class="contact-info">
+            <p>
+                <i class="fas fa-phone-alt"></i> 
+                <!-- Thẻ a với 'tel:' giúp bấm vào là gọi luôn trên điện thoại -->
+                <a href="tel:+84123456789">036 7584 529</a>
+            </p>
+            <p>
+                <i class="fas fa-envelope"></i> 
+                <!-- Thẻ a với 'mailto:' giúp bấm vào là mở trình gửi mail -->
+                <a href="mailto:phamvudat@gmail.com">harrisphammm@gmail.com</a>
+            </p>
+        </div>
+
+        <!-- Các nút liên kết mạng xã hội -->
+        <div class="social-links">
+            <!-- Thay dấu # bằng đường link Facebook của bạn -->
+            <a href="https://www.facebook.com/harrisphammm" class="social-btn facebook" title="Facebook">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            
+            <!-- Thay dấu # bằng đường link Tiktok của bạn -->
+            <a href="https://www.tiktok.com/@harris.dp" class="social-btn tiktok" title="TikTok">
+                <i class="fab fa-tiktok"></i>
+            </a>
+            
+            <!-- WhatsApp sử dụng link dạng wa.me/sodienthoai -->
+            <a href="https://wa.me/84367584529" class="social-btn whatsapp" title="WhatsApp">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+            
+            <!-- WeChat (Thường để link tới mã QR hoặc ID của bạn) -->
+            <a href="https://u.wechat.com/harrisphammm" class="social-btn wechat" title="WeChat">
+                <i class="fab fa-weixin"></i>
+            </a>
+        </div>
+    </div>
+
+</body>
+</html>
